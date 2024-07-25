@@ -26,7 +26,7 @@ function Navbar2() {
           </div>
           <div className="w-full pr-10 flex justify-end">
             <div className="hidden sm:flex justify-center items-center space-x-2  ">
-              {["Home", "Produk", "Toko Kami", "E-Commerce"].map((item) => (
+              {["Produk", "Toko Kami", "E-Commerce"].map((item) => (
                 <div
                   key={item}
                   className={`text-white rounded-full cursor-pointer`}
@@ -85,11 +85,11 @@ function Navbar2() {
       {menuOpen && (
         <div className="sm:hidden text-white bg-black w-1/3 flex flex-col justify-end items-center space-y-5 pt-5 pb-5 left-64 rounded-lg absolute top-16">
           <div className="text-center  w-full">
-            <Link href={"/"}>
+            {/* <Link href={"/"}>
               <div className="hover:bg-green-800  hover:px-4 hover:py-2 px-4 py-2 rounded-full">
                 Home
               </div>
-            </Link>
+            </Link> */}
             <Link href={"/produk"}>
               <div className="hover:bg-green-800 hover:px-4 hover:py-2 px-4 py-2 rounded-full">
                 Produk
