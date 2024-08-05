@@ -1,7 +1,6 @@
 "use client";
 import { Anchor, Tabs } from "antd";
-import { scroller, Element } from "react-scroll";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import Navbar2 from "../layout/Navbar2";
 import Footer from "../layout/Footer";
 import Coffee from "../tabs-coffee/Coffee";
@@ -18,12 +17,16 @@ const { TabPane } = Tabs;
 
 function Page() {
   const [selectedSection, setSelectedSection] = useState("coffee");
-  const [mode, setMode] = useState("top");
+  const sectionRefs = useRef({});
 
   useEffect(() => {
-    document
-      .getElementById(selectedSection)
-      .scrollIntoView({ behavior: "smooth" });
+    if (sectionRefs.current[selectedSection]) {
+      const offset = 60; // Sesuaikan dengan tinggi navbar Anda
+      const element = sectionRefs.current[selectedSection];
+      const top =
+        element.getBoundingClientRect().top + window.pageYOffset - offset;
+      window.scrollTo({ top, behavior: "smooth" });
+    }
   }, [selectedSection]);
 
   const scrollToSection = (section) => {
@@ -39,8 +42,6 @@ function Page() {
     { key: "beans", title: "Beans", component: <Beans /> },
     { key: "tea-leafs", title: "Tea Leafs", component: <TeaLeafs /> },
     { key: "chocolate", title: "Chocolate", component: <Chocolate /> },
-
-    // Tambahkan bagian lain sesuai kebutuhan
   ];
 
   return (
@@ -49,8 +50,8 @@ function Page() {
       <div>
         <div>
           <div className="hidden sm:inline lg:inline ">
-            <div className="flex flex-col sm:flex-row md:justify-between h-full w-full  space-x-5  mx-auto ">
-              <div className=" mt-20 mx-auto w-[90rem]  h-auto  ">
+            <div className="flex flex-col sm:flex-row md:justify-between h-full w-full space-x-5 mx-auto ">
+              <div className=" mt-20 mx-auto w-[90rem] h-auto ">
                 <>
                   <div className="flex px-5 md:px-20 py-2 mt-[5rem] space-x-3">
                     <div className="md:w-1/4">
@@ -73,7 +74,11 @@ function Page() {
                     </div>
                     <div className="w-full">
                       {sections.map((section) => (
-                        <div key={section.key} id={section.key}>
+                        <div
+                          key={section.key}
+                          id={section.key}
+                          ref={(el) => (sectionRefs.current[section.key] = el)}
+                        >
                           <br />
                           <h1 className="font-bold text-2xl mt-6">
                             {section.title} Section
@@ -90,7 +95,6 @@ function Page() {
           </div>
 
           {/* Page Kecil */}
-
           <div className="sm:inline lg:hidden md:hidden sm:w-full w-full mx-auto justify-center px-0 py-2 ">
             <div className="mx-auto h-full">
               <div className="mt-24 p-5 mb-20 text-black">
@@ -101,7 +105,11 @@ function Page() {
                   >
                     {sections.map((section) => (
                       <TabPane tab={section.title} key={section.key}>
-                        <div id={section.key} className="p-4">
+                        <div
+                          id={section.key}
+                          className="p-4"
+                          ref={(el) => (sectionRefs.current[section.key] = el)}
+                        >
                           {section.component}
                         </div>
                       </TabPane>
