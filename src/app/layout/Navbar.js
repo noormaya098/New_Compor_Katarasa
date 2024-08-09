@@ -75,7 +75,7 @@ function Navbar() {
                         href="https://sandbox.katarasa.id/home"
                         target="_blank"
                       >
-                        <div className="hover:bg-green-800 hover:px-4 hover:py-2 px-4 py-2 rounded-full">
+                        <div className=" bg-green-800 text-white hover:text-green-800 hover:bg-white   hover:px-4 hover:py-2 px-4 py-2 rounded-full">
                           {item}
                         </div>
                       </Link>

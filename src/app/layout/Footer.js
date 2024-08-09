@@ -43,7 +43,7 @@ function Footer() {
                 Jakarta Timur, Daerah Khusus Ibukota Jakarta 13740
               </p>
               <br />
-              <p>+62 812-9981-9900</p>
+              {/* <p>+62 821-1125-2550</p> */}
             </div>
             {/* Section 3  */}
             <div className="w-1/3 h-40 pt-4  pl-14">
